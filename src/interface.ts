@@ -1,92 +1,91 @@
-// function makeChai(order:{type:string;sugar:number; strong:boolean}) {
-//     console.log(order);
-// }
-
-type ChaiOrder = {
-    type:string;
-    sugar:number;
-    strong:boolean;
+interface User {
+    id: number;
+    name: string;
+    email: string;
+    isActive?: boolean;
 }
 
-function makeChai(order:ChaiOrder) {
-    console.log(order);
+const user1: User = {
+    id: 1,
+    name: "John Doe",
+    email: "john.doe@example.com",
+    // isActive: true // Optional property
+
+};
+
+interface Product {
+    readonly id: number;
+    name: string;
+    price: number;
+}
+
+const product1: Product = {
+    id: 101,
+    name: "Laptop",
+    price: 999.99
+};
+
+// product1.id = 102; // Error: Cannot assign to 'id' because it is a read-only property.
+
+interface Discountable {
+    applyDiscount(discount: number): number;
+}
+
+class Item implements Discountable {
+    constructor(public name: string, public price: number) {}
+
+    applyDiscount(discount: number): number {
+        return this.price - (this.price * discount / 100);
+    }
+}
+
+const item1 = new Item("Smartphone", 499.99);
+console.log(item1.applyDiscount(10)); // Outputs the price after applying a 10% discount
+
+interface Discountable2 {
+    (price:number):number;
+} 
+
+const applyDiscount: Discountable2 = (price: number) => {
+    return price - (price * 0.1); // Applying a 10% discount
+};
+
+console.log(applyDiscount(200)); // Outputs the price after applying a 10% discount
+
+interface Coffee{
+    start():void;
+    stop():void;
+}
+
+const myCoffeeMachine: Coffee = {
+    start() {
+        console.log("Coffee machine started.");
+    },
+    stop() {
+        console.log("Coffee machine stopped.");
+    }
+};
+
+myCoffeeMachine.start(); // Outputs: Coffee machine started.
+myCoffeeMachine.stop();  // Outputs: Coffee machine stopped.
+
+interface UserProfile {
+    name:string;
+}
+
+interface UserProfile {
+  age: number;
 }
 
 
-function serveChai(order:ChaiOrder) {
-    console.log(order);
-    
+const userProfile: UserProfile = {
+    name:'Abdul',
+    age: 30
 }
 
-type TeaRecipe = {
-    water:number;
-    milk:number
-}
+interface A {a:string};
+interface B {b:number};
 
-class MasalaChai implements TeaRecipe{
-    water = 100;
-    milk = 50;
-}
+interface C extends A, B {}
 
-// type CupSize = "small"|"large";
-interface CupSize {
-    size: "small"|"large";
-}
 
-class Chai implements CupSize{
-    size: "small"|"large" = "small";
-
-}
-
-// type Response = {ok:true} |{ok:false;};
-interface Response {
-    ok: boolean;
-}
-// class myResponse implements Response{
-//     ok: boolean = true;
-    
-// }
-
-type TeaType = "green"|"black"|"masala"; //literal type
-
-function orderChai(t:TeaType){
-    console.log(t);
-}
-
-type BaseChai = {teaLeaves:number};
-type ExtraChai = {masala:number};
-
-type FullChai = BaseChai & ExtraChai; // dono ka hona mandatroy hai 
-
-const cup:FullChai = {
-    teaLeaves: 10,
-    masala: 5
-}
-
-type User = {
-    username:string;
-    bio?:string;
-}
-
-const u1:User = {
-    username:"john_doe"
-}
-
-const u2:User = {
-    username:"jane_doe",
-    bio:"I love chai!"
-}
-
-type config = {
-    readonly apiKey:string;
-    timeout:number;
-}
-
-const myConfig:config = {
-    apiKey:"123456",
-    timeout:5000
-}
-
-// myConfig.apiKey = "654321"; // Error: Cannot assign to 'apiKey' because it is a read-only property.
-
-myConfig.timeout = 3000; // Allowed: timeout is not read-only
