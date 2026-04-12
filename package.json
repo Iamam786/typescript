@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev":"npx tsc"
+    "dev": "npx tsc"
   },
   "repository": {
     "type": "git",
@@ -14,12 +14,15 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/Iamam786/typescript/issues"
   },
   "homepage": "https://github.com/Iamam786/typescript#readme",
   "devDependencies": {
     "typescript": "^6.0.2"
+  },
+  "dependencies": {
+    "axios": "^1.15.0"
   }
 }
